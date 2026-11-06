@@ -52,18 +52,29 @@ fun TelaGastos(
     }
 }
 
+@Preview(showBackground = true)
 @Composable
-fun FiltroCategorias(
-    selecionada: Categoria?,
-    aoFiltrar: (Categoria?) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    LazyRow(modifier = modifier, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        item {
-            Etiqueta("Todas", ativa = selecionada == null, aoClicar = { aoFiltrar(null) })
-        }
-        items(Categoria.entries.toList()) { c ->
-            Etiqueta(c.rotulo, ativa = selecionada == c, aoClicar = { aoFiltrar(c) })
-        }
-    }
+fun ResumoTotalPreview() {
+    ResumoTotal(total = 201.70, quantidade = 4)
+}
+
+@Preview(showBackground = true)
+@Composable
+fun LinhaGastoPreview() {
+    LinhaGasto(
+        gasto = Gasto(1, "Almoço no bandejão", 18.50, Categoria.ALIMENTACAO),
+        aoRemover = {}
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun FormularioComErroPreview() {
+    FormularioGasto(
+        descricao = "Café", valorTexto = "abc",
+        categoria = Categoria.ALIMENTACAO,
+        erro = "O valor precisa ser um número",
+        aoDigitarDescricao = {}, aoDigitarValor = {},
+        aoSelecionarCategoria = {}, aoAdicionar = {}
+    )
 }
