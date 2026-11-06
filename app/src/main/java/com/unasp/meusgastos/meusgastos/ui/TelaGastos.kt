@@ -51,3 +51,19 @@ fun TelaGastos(
         }
     }
 }
+
+@Composable
+fun FiltroCategorias(
+    selecionada: Categoria?,
+    aoFiltrar: (Categoria?) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    LazyRow(modifier = modifier, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        item {
+            Etiqueta("Todas", ativa = selecionada == null, aoClicar = { aoFiltrar(null) })
+        }
+        items(Categoria.entries.toList()) { c ->
+            Etiqueta(c.rotulo, ativa = selecionada == c, aoClicar = { aoFiltrar(c) })
+        }
+    }
+}
